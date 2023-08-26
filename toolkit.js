@@ -5,6 +5,10 @@
  * Alexander Buck
  */
 
+function postTitle(post) {
+	return post.getElementsByClassName("gh-content-entry-title")[0].innerText;
+}
+
 /**
  * Bulk delete articles on current page.  Deletion is limited by title and quantity.
  * Run this when you have are viewing the list of posts you want to delete from.
@@ -12,7 +16,7 @@
  */
 function bulkDeleteByTitle(title, limit) {
 	Array.from(document.getElementsByClassName("gh-post-list-plain-status"))
-      .filter(p => p.innerText.indexOf(title) != -1)
+      .filter(p => postTitle(p) === title)
       .filter((p,i) => i < limit)
       .forEach(p => {
         let attribs = p.attributes;
